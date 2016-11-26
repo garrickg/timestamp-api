@@ -9,7 +9,7 @@ app.use(logger());
 app.use(express.static(__dirname + '/public'));
 
 app.all("*", function(req, res, next) {
-  res.writeHead(200, { "Content-Type": "text/html" });
+  res.writeHead(200, { "Content-Type": "text/plain" });
   next();
 });
 
