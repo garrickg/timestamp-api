@@ -1,7 +1,7 @@
 {
   "name": "timestamp",
   "version": "1.0.0",
-  "description": "",
+  "description": "An Timestamp Microservice API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,11 @@
   "author": "Garrick Gunn",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "moment": "^2.17.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garrickg/timestamp-api.git"
   }
 }

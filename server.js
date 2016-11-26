@@ -1,5 +1,6 @@
 var express = require('express')
 var path = require('path')
+var moment = require('moment')
 var app = express()
 var port = process.env.PORT || 3000;
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -16,22 +17,19 @@ app.get('/', function(req, res) {
 });
 
 app.get("/:id", function(req, res) {
-    if (new Date(req.params.id) == "Invalid Date") { // Checks if valid string date or unix date in milliseconds
-        if (new Date(req.params.id*1000) == "Invalid Date") { // Checks if valid unix date in seconds
-            var json = { 
-                unix: null, 
-                natural: null 
-            }
-            res.end(JSON.stringify(json)) // Returns null result
+    if (!moment(req.params.id).isValid()) { // Checks if arg is valid date
+        var json = { 
+            unix: null, 
+            natural: null 
         }
-        else {
-            res.end(JSON.stringify(getDateJSON(new Date(req.params.id*1000)))) // Returns results from unix timestamp in seconds
-        }
+        res.end(JSON.stringify(json)) // Responds with null JSON
     }
     else {
-        res.end(JSON.stringify(getDateJSON(new Date(req.params.id)))) // Returns results from string date or unix time in milliseconds
+        res.end(JSON.stringify({ 
+            "unix": moment(req.params.id).format("X"), // Unix time in seconds
+            "natural": moment(req.params.id).format("MMMM D, YYYY") // Natural date string
+        })) // Responds with date JSON
     }
-    
 });
 
 app.get("*", function(req, res) {
@@ -41,10 +39,3 @@ app.get("*", function(req, res) {
 app.listen(port, function () {
   console.log('Timestamp app listening on port ' + port + '!')
 })
-
-function getDateJSON (date) {
-    return { 
-            "unix": date.getTime() / 1000, // Unix time in seconds
-            "natural": months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() // Natural date string
-    }
-}
