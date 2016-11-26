@@ -1,14 +1,15 @@
 var express = require('express')
-var path = require('path')
 var moment = require('moment')
+var logger = require("morgan");
 var app = express()
 var port = process.env.PORT || 3000;
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
+app.use(logger());
 app.use(express.static(__dirname + '/public'));
 
 app.all("*", function(req, res, next) {
-  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.writeHead(200, { "Content-Type": "text/html" });
   next();
 });
 
