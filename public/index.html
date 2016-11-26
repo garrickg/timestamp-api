@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Timestamp Microservice Landing Page</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+
+      <link rel="stylesheet" href="/css/style.css">
+
+  
+</head>
+
+<body>
+  <div class="col-md-8 col-md-offset-2">
+	<h1>Timestamp Microservice</h1>
+	<hr/>
+	<h2>User Stories:</h2>
+	<ul>
+		<li>I can pass a string as a parameter, and it will check to see whether that string contains either a unix timestamp or a natural language date (example: January 1, 2016).</li>
+		<li>If it does, it returns both the Unix timestamp and the natural language form of that date.</li>
+		<li>If it does not contain a date or Unix timestamp, it returns null for those properties.</li>
+	</ul>
+	<h2>Example Usage</h2>
+	<code><a href="https://peaceful-coast-28289.herokuapp.com/November%2025,%202016">https://peaceful-coast-28289.herokuapp.com/November%2025,%202016</a><br/>
+	<a href="https://peaceful-coast-28289.herokuapp.com/November 25, 2016">https://peaceful-coast-28289.herokuapp.com/November 25, 2016</a><br/>
+	<a href="https://peaceful-coast-28289.herokuapp.com/1450137600">https://peaceful-coast-28289.herokuapp.com/1450137600</a><br/>
+	<a href="https://peaceful-coast-28289.herokuapp.com/1450137600000">https://peaceful-coast-28289.herokuapp.com/1450137600000</a></code>
+	<h2>Example Output</h2>
+	<code>{
+"unix": 1480032000,
+"natural": "November 25, 2016"
+	}</code>
+	<hr/>
+	<p>This was completed as an API project for the FreeCodeCamp Back End Certification, check out the details <a href="https://www.freecodecamp.com/challenges/timestamp-microservice">here</a>.</p>
+	<footer>
+		<a href="https://github.com/garrickg" target="_blank"><i class="fa fa-2x fa-github" aria-hidden="true"></i></a>
+		<a href="http://codepen.io/garrickg/" target="_blank"><i class="fa fa-2x fa-codepen" aria-hidden="true"></i></a>
+		<a href="https://www.freecodecamp.com/garrickg" target="_blank"><i class="fa fa-2x fa-free-code-camp" aria-hidden="true"></i></a>
+	</footer>
+</div>
+  <script src='https://use.fontawesome.com/1dd1d70e46.js'></script>
+
+  
+</body>
+</html>
