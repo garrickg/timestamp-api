@@ -1,11 +1,9 @@
 var express = require('express')
 var moment = require('moment')
-var logger = require("morgan");
 var app = express()
 var port = process.env.PORT || 3000;
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-app.use(logger());
 app.use(express.static(__dirname + '/public'));
 
 app.all("*", function(req, res, next) {
@@ -18,19 +16,19 @@ app.get('/', function(req, res) {
 });
 
 app.get("/:id", function(req, res) {
-    if (!moment(req.params.id).isValid()) { // Checks if arg is valid date
-        var json = { 
-            unix: null, 
-            natural: null 
-        }
-        res.end(JSON.stringify(json)) // Responds with null JSON
-    }
-    else {
-        res.end(JSON.stringify({ 
-            "unix": moment(req.params.id).format("X"), // Unix time in seconds
-            "natural": moment(req.params.id).format("MMMM D, YYYY") // Natural date string
-        })) // Responds with date JSON
-    }
+  var date, json
+  if (!isNaN(req.params.id) && moment.unix(req.params.id).isValid) {
+    date = moment.unix(req.params.id)
+    json = { "unix": date.format("X"), "natural": date.format("MMMM D, YYYY") }
+  }
+  else if (moment(req.params.id).isValid()) {
+    date = moment(req.params.id)
+    json = { "unix": date.format("X"), "natural": date.format("MMMM D, YYYY") }
+  }
+  else {
+    json = { "unix": null, "natural": null }
+  }
+  res.end(JSON.stringify(json)) // Responds with null JSON
 });
 
 app.get("*", function(req, res) {
