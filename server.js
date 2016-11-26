@@ -12,7 +12,8 @@ app.all("*", function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-   res.render('index', {url: req.headers.referer})
+  var url = req.protocol + "://" + req.get('host')
+  res.render('index', {url: url})
 });
 
 app.get("/:id", function(req, res) {
