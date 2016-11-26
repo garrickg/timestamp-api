@@ -4,14 +4,15 @@ var app = express()
 var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'));
+app.set('views', (__dirname + '/public'))
+app.set('view engine', 'pug')
 
 app.all("*", function(req, res, next) {
-  res.writeHead(200, { "Content-Type": "text/plain" });
   next();
 });
 
 app.get('/', function(req, res) {
-  res.render('index');
+   res.render('index', {url: req.headers.referer})
 });
 
 app.get("/:id", function(req, res) {
